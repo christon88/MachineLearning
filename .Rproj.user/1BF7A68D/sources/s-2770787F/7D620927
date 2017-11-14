@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1510694770746.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "7D620927",
+    "lastKnownWriteTime" : 1510695058,
+    "last_content_update" : 1510695064318,
+    "path" : "C:/Users/Eier/Dropbox/Christian/MachineLearning/01_Preprocessing/Data_Preprocessing/data_preprocessing_template.R",
+    "project_path" : "01_Preprocessing/Data_Preprocessing/data_preprocessing_template.R",
+    "properties" : {
+        "cursorPosition" : "4,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
