@@ -22,8 +22,19 @@ training_set = subset(dataset, split == TRUE)
 test_set = subset(dataset, split == FALSE)
 
 # Fitting regression model to training set
-regressor = lm(formula = Profit ~ .,
-               data = training_set)
+regressor = lm(formula = Profit ~ R.D.Spend + Administration + Marketing.Spend + State,
+               data = dataset)
+
+regressor = lm(formula = Profit ~ R.D.Spend + Administration + Marketing.Spend,
+               data = dataset)
+
+regressor = lm(formula = Profit ~ R.D.Spend + Marketing.Spend,
+               data = dataset)
+
+regressor = lm(formula = Profit ~ R.D.Spend,
+               data = dataset)
+
+summary(regressor)
 
 # Predicting test results
 y_pred = predict(regressor, test_set)
