@@ -19,10 +19,8 @@ x = sc_x.fit_transform(x)
 from sklearn.cross_validation import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.25, random_state = 0)
 
-# Fitting logistic regression to training set
-from sklearn.linear_model import LogisticRegression
-classifier = LogisticRegression(random_state = 0)
-classifier.fit(x_train, y_train)
+# Fitting  regression to training set
+
 
 # Predicting test set results
 y_pred = classifier.predict(x_test) 

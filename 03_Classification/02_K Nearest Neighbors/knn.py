@@ -19,9 +19,9 @@ x = sc_x.fit_transform(x)
 from sklearn.cross_validation import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.25, random_state = 0)
 
-# Fitting logistic regression to training set
-from sklearn.linear_model import LogisticRegression
-classifier = LogisticRegression(random_state = 0)
+# Fitting  regression to training set
+from sklearn.neighbors import KNeighborsClassifier
+classifier = KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 2)
 classifier.fit(x_train, y_train)
 
 # Predicting test set results
@@ -44,6 +44,7 @@ for i, j in enumerate(np.unique(y_set)):
     plt.scatter(x_set[y_set == j, 0], x_set[y_set ==j, 1],
                 c = ListedColormap(('red', 'green'))(i), label = j)
 plt.show()
+
     
 x_set, y_set = x_test, y_test
 x1, x2 = np.meshgrid(np.arange(start = x_set[:, 0].min() - 1, stop = x_set[:, 0].max() + 1, step = 0.01),
