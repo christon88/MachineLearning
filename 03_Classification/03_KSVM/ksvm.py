@@ -21,7 +21,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.25, rand
 
 # Fitting  regression to training set
 from sklearn import svm
-classifier = svm.SVC(kernel = 'linear', random_state = 0)
+classifier = svm.SVC(kernel = 'rbf', random_state = 0)
 classifier.fit(x_train, y_train) 
 
 # Predicting test set results
