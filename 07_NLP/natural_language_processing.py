@@ -8,40 +8,47 @@ import pandas as pd
 # Importing the dataset
 dataset = pd.read_csv('Restaurant_Reviews.tsv', delimiter = '\t', quoting = 3)
 
-# Cleaning the texts
+# Cleaning the text
 import re
 import nltk
-nltk.download('stopwords')
+#nltk.download('stopwords')
 from nltk.corpus import stopwords
-from nltk.stem.porter import PorterStemmer
+from nltk.stem.snowball import SnowballStemmer
+stemmer = SnowballStemmer('english')
 corpus = []
-for i in range(0, 1000):
+for i in range (0, 1000):
     review = re.sub('[^a-zA-Z]', ' ', dataset['Review'][i])
     review = review.lower()
     review = review.split()
-    ps = PorterStemmer()
-    review = [ps.stem(word) for word in review if not word in set(stopwords.words('english'))]
-    review = ' '.join(review)
+    review = ' '.join([stemmer.stem(word) for word in review if not word in set(stopwords.words('english'))])
     corpus.append(review)
-
-# Creating the Bag of Words model
+    
 from sklearn.feature_extraction.text import CountVectorizer
-cv = CountVectorizer(max_features = 1500)
-X = cv.fit_transform(corpus).toarray()
-y = dataset.iloc[:, 1].values
+cv = CountVectorizer(max_features=1500)
+x = cv.fit_transform(corpus).toarray()
+y = dataset.iloc[:, 1]
 
-# Splitting the dataset into the Training set and Test set
+# Paste from Classification
+
+
+# Feature scaling
+from sklearn.preprocessing import StandardScaler
+sc_x = StandardScaler()
+x = sc_x.fit_transform(x)
+
+# Splitting data into taining and test set
 from sklearn.cross_validation import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.20, random_state = 0)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.25, random_state = 0)
 
-# Fitting Naive Bayes to the Training set
-from sklearn.naive_bayes import GaussianNB
-classifier = GaussianNB()
-classifier.fit(X_train, y_train)
+# Fitting  regression to training set
+from sklearn.ensemble import RandomForestClassifier
+classifier = RandomForestClassifier(n_estimators = 200, criterion = 'entropy')
 
-# Predicting the Test set results
-y_pred = classifier.predict(X_test)
+classifier.fit(x_train, y_train)
 
-# Making the Confusion Matrix
+# Predicting test set results
+y_pred = classifier.predict(x_test) 
+
+# Confusion matrix
 from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(y_test, y_pred)
+c = confusion_matrix(y_test, y_pred)
